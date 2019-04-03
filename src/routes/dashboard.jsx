@@ -1,4 +1,3 @@
-import Settings from "../views/Settings/Settings.jsx";
 import SalaryCalc from "../views/salary/SalaryCalc.jsx";
 import Help from "../views/Help/Help.jsx";
 
