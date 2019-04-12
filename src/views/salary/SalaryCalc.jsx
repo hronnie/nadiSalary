@@ -1,14 +1,18 @@
 import React from "react";
+import BankNote from "./BankNote/BankNote";
 import {
     Card,
     CardBody,
     CardHeader,
     CardTitle,
     Row,
-    Col, Alert
+    Col
 } from "reactstrap";
 
+//import BankNote from '../../components/BankNote/BankNote.jsx';
+
 import {Formik, Field, Form, ErrorMessage} from 'formik';
+
 
 
 class SalaryCalc extends React.Component {
@@ -33,7 +37,29 @@ class SalaryCalc extends React.Component {
                 fiveThousand: 0,
                 tenThousand: 0,
                 twentyThousand: 0,
-            }
+            },
+            treatments: {
+                anita: 0,
+                aron: 0,
+                barbi: 0,
+                beriZsuzsi: 0,
+                hajni: 0,
+                reni: 0,
+                tomi: 0,
+                vera: 0,
+                mZsuzsi: 0
+            },
+            salaries: {
+                anita: 0,
+                aron: 0,
+                barbi: 0,
+                beriZsuzsi: 0,
+                hajni: 0,
+                reni: 0,
+                tomi: 0,
+                vera: 0,
+                mZsuzsi: 0
+            },
         }
     }
 
@@ -60,12 +86,27 @@ class SalaryCalc extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
+    onChangeTreatments = e => {
+        let treatments = this.state.treatments;
+        treatments[e.target.name] = e.target.value;
+        this.setState({treatments},
+            () => {
+                let sumIncome = this.calcSumIncome(this.state.banknote);
+                this.setState({sumIncome: sumIncome,
+                    expenses: sumIncome * 0.2,
+                    salaryPart: sumIncome * 0.8})
+            })
+    }
+
     onChangeBankNote = e => {
         let banknote = this.state.banknote;
         banknote[e.target.name] = e.target.value;
         this.setState({banknote},
             () => {
-                this.setState({sumIncome: this.calcSumIncome(this.state.banknote)})
+                let sumIncome = this.calcSumIncome(this.state.banknote);
+                this.setState({sumIncome: sumIncome,
+                                    expenses: sumIncome * 0.2,
+                                    salaryPart: sumIncome * 0.8})
             })
     }
 
@@ -81,118 +122,83 @@ class SalaryCalc extends React.Component {
                             <CardBody>
                                 <Row>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>50 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="fifty"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.fifty}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.fifty}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='fifty'
+                                            label="50 forintosok"
+                                        />
                                     </Col>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>100 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="hundred"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.hundred}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.hundred}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='hundred'
+                                            label="100 forintosok"
+                                        />
                                     </Col>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>200 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="twoHundred"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.twoHundred}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.twoHundred}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='twoHundred'
+                                            label="200 forintosok"
+                                        />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>500 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="fiveHundred"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.fiveHundred}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.fiveHundred}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='fiveHundred'
+                                            label="500 forintosok"
+                                        />
                                     </Col>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>1000 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="thousand"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.thousand}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.thousand}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='thousand'
+                                            label="1000 forintosok"
+                                        />
                                     </Col>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>2000 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="twoThousand"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.twoThousand}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.twoThousand}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='twoThousand'
+                                            label="2000 forintosok"
+                                        />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>5000 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="fiveThousand"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.fiveThousand}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.fiveThousand}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='fiveThousand'
+                                            label="5000 forintosok"
+                                        />
                                     </Col>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>10000 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="tenThousand"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.tenThousand}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.tenThousand}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='tenThousand'
+                                            label="10000 forintosok"
+                                        />
                                     </Col>
                                     <Col md={3}>
-                                        <Row>
-                                            <label>20000 forintosok</label>
-                                        </Row>
-                                        <Row>
-                                            <input
-                                                type="number"
-                                                name="twentyThousand"
-                                                onChange={this.onChangeBankNote}
-                                                value={this.state.banknote.twentyThousand}/>
-                                        </Row>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.twentyThousand}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='twentyThousand'
+                                            label="20000 forintosok"
+                                        />
                                     </Col>
                                 </Row>
+                                <hr/>
                                 <Row>
                                     <Col>
                                         Áron
