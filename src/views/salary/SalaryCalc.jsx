@@ -1,5 +1,5 @@
 import React from "react";
-import BankNote from "./BankNote/BankNote";
+import BankNote from "./components/BankNote/BankNote";
 import {
     Card,
     CardBody,
@@ -8,10 +8,7 @@ import {
     Row,
     Col
 } from "reactstrap";
-
-//import BankNote from '../../components/BankNote/BankNote.jsx';
-
-import {Formik, Field, Form, ErrorMessage} from 'formik';
+import Treatment from "./components/Treatment/Treatment";
 
 
 
@@ -39,15 +36,87 @@ class SalaryCalc extends React.Component {
                 twentyThousand: 0,
             },
             treatments: {
-                anita: 0,
-                aron: 0,
-                barbi: 0,
-                beriZsuzsi: 0,
-                hajni: 0,
-                reni: 0,
-                tomi: 0,
-                vera: 0,
-                mZsuzsi: 0
+                anita: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                aron: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                barbi: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                beriZsuzsi: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                hajni: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                reni: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                tomi: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                vera: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
+                mZsuzsi: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
             },
             salaries: {
                 anita: 0,
@@ -63,11 +132,6 @@ class SalaryCalc extends React.Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
-
     calcSumIncome(banknote) {
         let sum = 0;
         sum += banknote.fifty * 50;
@@ -82,19 +146,35 @@ class SalaryCalc extends React.Component {
         return sum;
     }
 
+    calcSumTreatments(sumTreatments) {
+        let sumTreatmentValue = 0;
+        Object.values(sumTreatments).forEach(treatmentsByName => {
+            Object.values(treatmentsByName).forEach(treatmentsValue => {
+                sumTreatmentValue += treatmentsValue;
+            });
+        });
+        return sumTreatmentValue;
+    }
+
+    calcHourlyRate(sumTreatments, salaryPart) {
+        if (!salaryPart || salaryPart === 0) {
+            return 0;
+        }
+        return Math.round(salaryPart / sumTreatments);
+    }
+
     onChange = e => {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    onChangeTreatments = e => {
+    onChangeNoOfTreatment = (personName, person) => e => {
         let treatments = this.state.treatments;
-        treatments[e.target.name] = e.target.value;
+        treatments[person][e.target.name] = Number.parseInt(e.target.value);
         this.setState({treatments},
             () => {
-                let sumIncome = this.calcSumIncome(this.state.banknote);
-                this.setState({sumIncome: sumIncome,
-                    expenses: sumIncome * 0.2,
-                    salaryPart: sumIncome * 0.8})
+                let sumTreatments = this.calcSumTreatments(this.state.treatments);
+                this.setState({sumTreatments: sumTreatments,
+                                    hourlyRate: this.calcHourlyRate(sumTreatments, this.state.salaryPart)})
             })
     }
 
@@ -106,7 +186,8 @@ class SalaryCalc extends React.Component {
                 let sumIncome = this.calcSumIncome(this.state.banknote);
                 this.setState({sumIncome: sumIncome,
                                     expenses: sumIncome * 0.2,
-                                    salaryPart: sumIncome * 0.8})
+                                    salaryPart: sumIncome * 0.8,
+                                    hourlyRate: this.calcHourlyRate(this.state.sumTreatments, this.state.salaryPart)})
             })
     }
 
@@ -200,17 +281,78 @@ class SalaryCalc extends React.Component {
                                 </Row>
                                 <hr/>
                                 <Row>
-                                    <Col>
-                                        Áron
-                                    </Col>
-                                    <Col>
-                                        <input
-                                            type="number"
-                                            name="noOfTreatments"
-                                            onChange={this.onChange}
-                                            value={this.state.noOfTreatments}/>
-                                    </Col>
+                                    <Treatment
+                                        personName="Anita"
+                                        person="anita"
+                                        treatments={this.state.treatments.anita}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
                                 </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Áron"
+                                        person="aron"
+                                        treatments={this.state.treatments.aron}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Barbi"
+                                        person="barbi"
+                                        treatments={this.state.treatments.barbi}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Budai Zsuzsi"
+                                        person="beriZsuzsi"
+                                        treatments={this.state.treatments.beriZsuzsi}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Hajni"
+                                        person="hajni"
+                                        treatments={this.state.treatments.hajni}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Reni"
+                                        person="reni"
+                                        treatments={this.state.treatments.reni}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Tomi"
+                                        person="tomi"
+                                        treatments={this.state.treatments.tomi}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Vera"
+                                        person="vera"
+                                        treatments={this.state.treatments.vera}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Máté Zsuzsi"
+                                        person="mZsuzsi"
+                                        treatments={this.state.treatments.mZsuzsi}
+                                        onChange={this.onChangeNoOfTreatment}
+                                    />
+                                </Row>
+                                <hr/>
                                 <Row>
                                     <Col>
                                         Összes fizetés
@@ -220,7 +362,8 @@ class SalaryCalc extends React.Component {
                                             type="number"
                                             name="sumIncome"
                                             onChange={this.onChange}
-                                            value={this.state.sumIncome}/>
+                                            value={this.state.sumIncome}
+                                            disabled={true}/>
                                     </Col>
                                 </Row>
                                 <Row>

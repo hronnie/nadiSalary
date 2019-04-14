@@ -68,8 +68,6 @@ class Help extends React.Component {
                             <p>A pranasys-ből kiexportált fájlt változtatás nélkül lehet használni. A lényeg, hogy az oszlop nevek legyenek ugyanazok.
                             Ha esetleg már megváltoztattad, akkor itt a minta hozzá, ami alapján vissza tudod változtatni:
                                 <a href="https://docs.google.com/spreadsheets/d/1KQUKEowO07zY0Ay5wwE6uNYwZRLdPHsqa1KrqUkvHl4/edit?usp=sharing" target="blank">https://docs.google.com/spreadsheets/d/1KQUKEowO07zY0Ay5wwE6uNYwZRLdPHsqa1KrqUkvHl4/edit?usp=sharing</a></p>
-                            <h2></h2>
-                            <p></p>
 
                         </CardBody>
 
