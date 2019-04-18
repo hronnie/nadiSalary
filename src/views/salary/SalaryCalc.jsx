@@ -17,9 +17,9 @@ class SalaryCalc extends React.Component {
     constructor() {
         super();
         // this.calculateSalary = this.calculateSalary.bind(this);
-        // this.calcHourlyRate = this.calcHourlyRate.bind(this);
+        // this.calcAndSetHourlyRate = this.calcAndSetHourlyRate.bind(this);
         this.state = {
-            noOfTreatments: 0,
+            //noOfTreatments: 0,
             sumIncome: 0,
             sumTreatments: 0,
             expenses: 0,
@@ -133,52 +133,79 @@ class SalaryCalc extends React.Component {
         }
     }
 
-    calcSumIncome(banknote) {
-        let sum = 0;
-        sum += banknote.fifty * 50;
-        sum += banknote.hundred * 100;
-        sum += banknote.twoHundred * 200;
-        sum += banknote.fiveHundred * 500;
-        sum += banknote.thousand * 1000;
-        sum += banknote.twoThousand * 2000;
-        sum += banknote.fiveThousand * 5000;
-        sum += banknote.tenThousand * 10000;
-        sum += banknote.twentyThousand * 20000;
-        return sum;
-    }
-
-    calcSalaries(sumTreatments, hourlyRate) {
-        let sumSalary = 0;
-        Object.values(sumTreatments).forEach(treatmentsByName => {
-            debugger;
-            Object.values(treatmentsByName).forEach(treatmentPerPerson => {
-                debugger;
-                Object.values(treatmentPerPerson).forEach(treatmentsByDay => {
-                    sumSalary += (treatmentsByDay * hourlyRate);
-                });
-            });
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve)
         });
     }
 
-    calcSumTreatments(sumTreatments) {
+
+    async recalculateSalary() {
+        await this.calcAndSetSumTreatments();
+        await this.calcAndSetSumIncome();
+        await this.calcAndSetHourlyRate();
+        await this.calcAndSetExpenses();
+        await this.calcAndSalaryPart();
+        await this.calcAndSetSalaries();
+    }
+
+    async calcAndSetSumTreatments() {
         let sumTreatmentValue = 0;
-        Object.values(sumTreatments).forEach(treatmentsByName => {
+        Object.values(this.state.treatments).forEach(treatmentsByName => {
             Object.values(treatmentsByName).forEach(treatmentsValue => {
                 sumTreatmentValue += treatmentsValue;
             });
         });
-        return sumTreatmentValue;
+        await this.setStateAsync({sumTreatments: sumTreatmentValue});
     }
 
-    calcHourlyRate(sumTreatments, salaryPart) {
-        if (!salaryPart || salaryPart === 0) {
-            return 0;
+    async calcAndSetHourlyRate() {
+        if (!this.state.salaryPart || this.state.salaryPart === 0) {
+            return;
         }
-        return Math.round(salaryPart / sumTreatments);
+        await this.setStateAsync({hourlyRate: Math.round(this.state.salaryPart / this.state.sumTreatments)});
     }
+
+    async calcAndSetExpenses() {
+        await this.setStateAsync({expenses: this.state.sumIncome * 0.2});
+    }
+
+    async calcAndSalaryPart() {
+        await this.setStateAsync({salaryPart: this.state.sumIncome * 0.8});
+    }
+
+    async calcAndSetSumIncome() {
+        let sum = 0;
+        sum += this.state.banknote.fifty * 50;
+        sum += this.state.banknote.hundred * 100;
+        sum += this.state.banknote.twoHundred * 200;
+        sum += this.state.banknote.fiveHundred * 500;
+        sum += this.state.banknote.thousand * 1000;
+        sum += this.state.banknote.twoThousand * 2000;
+        sum += this.state.banknote.fiveThousand * 5000;
+        sum += this.state.banknote.tenThousand * 10000;
+        sum += this.state.banknote.twentyThousand * 20000;
+        await this.setStateAsync({sumIncome: sum});
+    }
+
+    async calcAndSetSalaries() {
+        let salaries = this.state.salaries;
+        Object.keys(this.state.treatments).forEach(name => {
+            let sumSalaryPerPerson = 0;
+            Object.values(this.state.treatments[name]).forEach(treatmentPerDay => {
+                sumSalaryPerPerson += treatmentPerDay;
+            });
+            salaries[name] = sumSalaryPerPerson * this.state.hourlyRate;
+        })
+        await this.setStateAsync({salaries: salaries});
+    }
+
 
     onChange = e => {
-        this.setState({[e.target.name]: e.target.value});
+        this.setState({[e.target.name]: e.target.value},
+            () => {
+                this.recalculateSalary();
+            });
     }
 
     onChangeNoOfTreatment = (personName, person) => e => {
@@ -186,11 +213,7 @@ class SalaryCalc extends React.Component {
         treatments[person][e.target.name] = Number.parseInt(e.target.value);
         this.setState({treatments},
             () => {
-                let sumTreatments = this.calcSumTreatments(this.state.treatments);
-                let hourlyRate = this.calcHourlyRate(sumTreatments, this.state.salaryPart);
-                this.calcSalaries(this.state.treatments, hourlyRate);
-                this.setState({sumTreatments,
-                                    hourlyRate})
+                this.recalculateSalary();
             })
     }
 
@@ -199,12 +222,16 @@ class SalaryCalc extends React.Component {
         banknote[e.target.name] = e.target.value;
         this.setState({banknote},
             () => {
-                let sumIncome = this.calcSumIncome(this.state.banknote);
-                this.setState({sumIncome: sumIncome,
-                                    expenses: sumIncome * 0.2,
-                                    salaryPart: sumIncome * 0.8,
-                                    hourlyRate: this.calcHourlyRate(this.state.sumTreatments, this.state.salaryPart)})
+                this.recalculateSalary();
             })
+    }
+
+    calcSumPersonTreatmentHours(name) {
+        let sumSalaryTreatmentPerPerson = 0;
+        Object.values(this.state.treatments[name]).forEach(treatmentPerDay => {
+            sumSalaryTreatmentPerPerson += treatmentPerDay;
+        });
+        return sumSalaryTreatmentPerPerson;
     }
 
     render() {
@@ -438,8 +465,57 @@ class SalaryCalc extends React.Component {
                                 <Row>
                                     <Col>
                                         <Salary
+                                            label={"Anita"}
+                                            personSalary={this.state.salaries.anita}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('anita')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
                                             label={"Áron"}
-                                            personSalary={this.state.salaries.aron}/>
+                                            personSalary={this.state.salaries.aron}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('aron')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
+                                            label={"Barbi"}
+                                            personSalary={this.state.salaries.barbi}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('barbi')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
+                                            label={"Budai Zsuzsi"}
+                                            personSalary={this.state.salaries.beriZsuzsi}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('beriZsuzsi')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
+                                            label={"Hajni"}
+                                            personSalary={this.state.salaries.hajni}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('hajni')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
+                                            label={"Reni"}
+                                            personSalary={this.state.salaries.reni}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('reni')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
+                                            label={"Tomi"}
+                                            personSalary={this.state.salaries.tomi}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('tomi')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
+                                            label={"Vera"}
+                                            personSalary={this.state.salaries.vera}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('vera')}/>
+                                    </Col>
+                                    <Col>
+                                        <Salary
+                                            label={"Máté Zsuzsi"}
+                                            personSalary={this.state.salaries.mZsuzsi}
+                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('mZsuzsi')}/>
                                     </Col>
 
                                 </Row>
