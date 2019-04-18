@@ -9,6 +9,7 @@ import {
     Col
 } from "reactstrap";
 import Treatment from "./components/Treatment/Treatment";
+import Salary from "./components/Salary/Salary";
 
 
 
@@ -146,6 +147,19 @@ class SalaryCalc extends React.Component {
         return sum;
     }
 
+    calcSalaries(sumTreatments, hourlyRate) {
+        let sumSalary = 0;
+        Object.values(sumTreatments).forEach(treatmentsByName => {
+            debugger;
+            Object.values(treatmentsByName).forEach(treatmentPerPerson => {
+                debugger;
+                Object.values(treatmentPerPerson).forEach(treatmentsByDay => {
+                    sumSalary += (treatmentsByDay * hourlyRate);
+                });
+            });
+        });
+    }
+
     calcSumTreatments(sumTreatments) {
         let sumTreatmentValue = 0;
         Object.values(sumTreatments).forEach(treatmentsByName => {
@@ -173,8 +187,10 @@ class SalaryCalc extends React.Component {
         this.setState({treatments},
             () => {
                 let sumTreatments = this.calcSumTreatments(this.state.treatments);
-                this.setState({sumTreatments: sumTreatments,
-                                    hourlyRate: this.calcHourlyRate(sumTreatments, this.state.salaryPart)})
+                let hourlyRate = this.calcHourlyRate(sumTreatments, this.state.salaryPart);
+                this.calcSalaries(this.state.treatments, hourlyRate);
+                this.setState({sumTreatments,
+                                    hourlyRate})
             })
     }
 
@@ -417,6 +433,15 @@ class SalaryCalc extends React.Component {
                                             value={this.state.hourlyRate}
                                             disabled={true}/>
                                     </Col>
+                                </Row>
+                                <hr/>
+                                <Row>
+                                    <Col>
+                                        <Salary
+                                            label={"Áron"}
+                                            personSalary={this.state.salaries.aron}/>
+                                    </Col>
+
                                 </Row>
 
                             </CardBody>
