@@ -5,6 +5,7 @@ import {
     CardBody,
     CardHeader,
     CardTitle,
+    Button,
     Row,
     Col
 } from "reactstrap";
@@ -16,10 +17,7 @@ import Salary from "./components/Salary/Salary";
 class SalaryCalc extends React.Component {
     constructor() {
         super();
-        // this.calculateSalary = this.calculateSalary.bind(this);
-        // this.calcAndSetHourlyRate = this.calcAndSetHourlyRate.bind(this);
         this.state = {
-            //noOfTreatments: 0,
             sumIncome: 0,
             sumTreatments: 0,
             expenses: 0,
@@ -141,11 +139,12 @@ class SalaryCalc extends React.Component {
 
 
     async recalculateSalary() {
+        debugger;
         await this.calcAndSetSumTreatments();
         await this.calcAndSetSumIncome();
-        await this.calcAndSetHourlyRate();
         await this.calcAndSetExpenses();
         await this.calcAndSalaryPart();
+        await this.calcAndSetHourlyRate();
         await this.calcAndSetSalaries();
     }
 
@@ -160,6 +159,7 @@ class SalaryCalc extends React.Component {
     }
 
     async calcAndSetHourlyRate() {
+        debugger;
         if (!this.state.salaryPart || this.state.salaryPart === 0) {
             return;
         }
@@ -202,28 +202,19 @@ class SalaryCalc extends React.Component {
 
 
     onChange = e => {
-        this.setState({[e.target.name]: e.target.value},
-            () => {
-                this.recalculateSalary();
-            });
+        this.setState({[e.target.name]: e.target.value});
     }
 
     onChangeNoOfTreatment = (personName, person) => e => {
         let treatments = this.state.treatments;
         treatments[person][e.target.name] = Number.parseInt(e.target.value);
-        this.setState({treatments},
-            () => {
-                this.recalculateSalary();
-            })
+        this.setState({treatments});
     }
 
     onChangeBankNote = e => {
         let banknote = this.state.banknote;
         banknote[e.target.name] = e.target.value;
-        this.setState({banknote},
-            () => {
-                this.recalculateSalary();
-            })
+        this.setState({banknote});
     }
 
     calcSumPersonTreatmentHours(name) {
@@ -395,6 +386,8 @@ class SalaryCalc extends React.Component {
                                         onChange={this.onChangeNoOfTreatment}
                                     />
                                 </Row>
+                                <hr/>
+                                <Button onClick={() => this.recalculateSalary()}>Kiszámol</Button>
                                 <hr/>
                                 <Row>
                                     <Col>
