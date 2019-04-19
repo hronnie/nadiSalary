@@ -45,12 +45,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Sidebar
-          {...this.props}
-          routes={dashboardRoutes}
-          bgColor={this.state.backgroundColor}
-          activeColor={this.state.activeColor}
-        />
+
         <div className="main-panel" ref="mainPanel">
           <Header {...this.props} />
           <Switch>
