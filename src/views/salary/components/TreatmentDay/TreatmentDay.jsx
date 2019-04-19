@@ -5,9 +5,6 @@ class TreatmentDay extends React.Component {
         return (
             <div>
                 <div>
-                    <label>{this.props.labelOfDay}</label>
-                </div>
-                <div>
                     <input
                         type="number"
                         name={this.props.nameOfday}

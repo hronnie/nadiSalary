@@ -1,20 +1,32 @@
 import React from "react";
-//import {Col, Row} from "reactstrap/src";
+import {
+    Table
+} from "reactstrap";
 
 class BankNote extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                    <label>{this.props.label}</label>
-                </div>
-                <div>
-                    <input
-                        type="number"
-                        name={this.props.name}
-                        onChange={this.props.onChangeBankNote}
-                        value={this.props.banknoteValue}/>
-                </div>
+                <Table responsive>
+                    <thead className=" text-primary">
+                    <th>
+                        {this.props.label}
+                    </th>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input
+                                    type="number"
+                                    name={this.props.name}
+                                    onChange={this.props.onChangeBankNote}
+                                    value={this.props.banknoteValue}
+                                    size={5}/>
+                            </td>
+                        </tr>
+                     </tbody>
+                </Table>
             </div>
         )
     }

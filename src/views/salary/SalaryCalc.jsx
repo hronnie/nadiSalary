@@ -7,7 +7,8 @@ import {
     CardTitle,
     Button,
     Row,
-    Col
+    Col,
+    Table,
 } from "reactstrap";
 import Treatment from "./components/Treatment/Treatment";
 import Salary from "./components/Salary/Salary";
@@ -234,7 +235,7 @@ class SalaryCalc extends React.Component {
                             <CardHeader>
                                 <CardTitle tag="h4">Állítsd be az óraszámokat</CardTitle>
                             </CardHeader>
-                            <CardBody>
+                            <CardBody className="salaryTable">
                                 <Row>
                                     <Col md={3}>
                                         <BankNote
@@ -313,7 +314,14 @@ class SalaryCalc extends React.Component {
                                         />
                                     </Col>
                                 </Row>
-                                <hr/>
+
+                            </CardBody>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Állítsd be az kezelések számát</CardTitle>
+                            </CardHeader>
+                            <CardBody>
                                 <Row>
                                     <Treatment
                                         personName="Anita"
@@ -388,73 +396,85 @@ class SalaryCalc extends React.Component {
                                 </Row>
                                 <hr/>
                                 <Button onClick={() => this.recalculateSalary()}>Kiszámol</Button>
-                                <hr/>
-                                <Row>
-                                    <Col>
+
+                            </CardBody>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Összesités</CardTitle>
+                            </CardHeader>
+                            <CardBody  className="salaryTable">
+                                <Table responsive>
+                                    <thead className=" text-primary">
+                                    <th>
                                         Összes fizetés
-                                    </Col>
-                                    <Col>
-                                        <input
-                                            type="number"
-                                            name="sumIncome"
-                                            onChange={this.onChange}
-                                            value={this.state.sumIncome}
-                                            disabled={true}/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
+                                    </th>
+                                    <th>
                                         Összes kezelés
-                                    </Col>
-                                    <Col>
-                                        <input
-                                            type="number"
-                                            name="sumTreatments"
-                                            onChange={this.onChange}
-                                            value={this.state.sumTreatments}
-                                            disabled={true}/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
+                                    </th>
+                                    <th>
                                         Rezsi
-                                    </Col>
-                                    <Col>
-                                        <input
-                                            type="number"
-                                            name="expenses"
-                                            onChange={this.onChange}
-                                            value={this.state.expenses}
-                                            disabled={true}/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
+                                    </th>
+                                    <th>
                                         Kezelői rész
-                                    </Col>
-                                    <Col>
-                                        <input
-                                            type="number"
-                                            name="salaryPart"
-                                            onChange={this.onChange}
-                                            value={this.state.salaryPart}
-                                            disabled={true}/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
+                                    </th>
+                                    <th>
                                         Órabér
-                                    </Col>
-                                    <Col>
-                                        <input
-                                            type="number"
-                                            name="hourlyRate"
-                                            onChange={this.onChange}
-                                            value={this.state.hourlyRate}
-                                            disabled={true}/>
-                                    </Col>
-                                </Row>
-                                <hr/>
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                name="sumIncome"
+                                                onChange={this.onChange}
+                                                value={this.state.sumIncome}
+                                                disabled={true}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                name="sumTreatments"
+                                                onChange={this.onChange}
+                                                value={this.state.sumTreatments}
+                                                disabled={true}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                name="expenses"
+                                                onChange={this.onChange}
+                                                value={this.state.expenses}
+                                                disabled={true}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                name="salaryPart"
+                                                onChange={this.onChange}
+                                                value={this.state.salaryPart}
+                                                disabled={true}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                name="hourlyRate"
+                                                onChange={this.onChange}
+                                                value={this.state.hourlyRate}
+                                                disabled={true}/>
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </Table>
+                            </CardBody>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Fizetések</CardTitle>
+                            </CardHeader>
+                            <CardBody>
                                 <Row>
                                     <Col>
                                         <Salary
@@ -512,7 +532,6 @@ class SalaryCalc extends React.Component {
                                     </Col>
 
                                 </Row>
-
                             </CardBody>
                         </Card>
                     </Col>
