@@ -13,17 +13,21 @@ import {
 import Treatment from "./components/Treatment/Treatment";
 import Salary from "./components/Salary/Salary";
 import NumberFormat from 'react-number-format';
-
+import { DateRangePicker, Calendar } from 'react-date-range';
 
 class SalaryCalc extends React.Component {
     constructor() {
         super();
+        this.handleStartDateChange = this.handleStartDateChange.bind(this);
+        this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.state = {
             sumIncome: 0,
             sumTreatments: 0,
             expenses: 0,
             salaryPart: 0,
             hourlyRate: 0,
+            startDate: new Date(),
+            endDate: new Date(),
             banknote: {
                 fifty: 0,
                 hundred: 0,
@@ -232,12 +236,60 @@ class SalaryCalc extends React.Component {
         return sumSalaryTreatmentPerPerson;
     }
 
+    handleStartDateChange(date) {
+        this.setState({
+            startDate: date
+        });
+    }
+
+    handleEndDateChange(date) {
+        this.setState({
+            endDate: date
+        });
+    }
+
+
     render() {
+        const selectionRange = {
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            key: 'selection',
+        }
         return (
             <div className="content">
                 <Row>
                     <Col xs={12}>
                         <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Állítsd be az elszámolt időszakot</CardTitle>
+                            </CardHeader>
+                            <CardBody className="salaryTable">
+                                <Row>
+                                    <Col md={3}>
+                                        <strong>Ettől:</strong>
+                                        <Calendar
+                                            date={this.state.startDate}
+                                            onChange={this.handleStartDateChange}
+                                        />
+                                    </Col>
+                                    <Col md={3}>
+                                        <strong>Eddig:</strong>
+                                        <Calendar
+                                            date={this.state.endDate}
+                                            onChange={this.handleEndDateChange}
+                                        />
+                                    </Col>
+                                    {/*<Col md={3}>*/}
+                                        {/*<DatePicker*/}
+                                            {/*selected={this.state.endDate}*/}
+                                            {/*onChange={this.handleEndDateChange}*/}
+                                        {/*/>*/}
+                                    {/*</Col>*/}
+                                </Row>
+
+                            </CardBody>
+                        </Card>
+                       <Card>
                             <CardHeader>
                                 <CardTitle tag="h4">Állítsd be a bankjegyeket</CardTitle>
                             </CardHeader>
