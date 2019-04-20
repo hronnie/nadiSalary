@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import Treatment from "./components/Treatment/Treatment";
 import Salary from "./components/Salary/Salary";
-
+import NumberFormat from 'react-number-format';
 
 
 class SalaryCalc extends React.Component {
@@ -81,6 +81,15 @@ class SalaryCalc extends React.Component {
                     saturday: 0,
                     sunday: 0,
                 },
+                gabor: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
                 reni: {
                     monday: 0,
                     tuesday: 0,
@@ -123,6 +132,7 @@ class SalaryCalc extends React.Component {
                 aron: 0,
                 barbi: 0,
                 beriZsuzsi: 0,
+                gabor: 0,
                 hajni: 0,
                 reni: 0,
                 tomi: 0,
@@ -201,20 +211,16 @@ class SalaryCalc extends React.Component {
         await this.setStateAsync({salaries: salaries});
     }
 
-
-    onChange = e => {
-        this.setState({[e.target.name]: e.target.value});
-    }
-
-    onChangeNoOfTreatment = (personName, person) => e => {
+    onChangeNoOfTreatment = (value, personName, name) => {
+        debugger;
         let treatments = this.state.treatments;
-        treatments[person][e.target.name] = Number.parseInt(e.target.value);
+        treatments[personName][name] = Number.parseInt(value);
         this.setState({treatments});
     }
 
-    onChangeBankNote = e => {
+    onChangeBankNote =  (value, name) => {
         let banknote = this.state.banknote;
-        banknote[e.target.name] = e.target.value;
+        banknote[name] = value;
         this.setState({banknote});
     }
 
@@ -233,7 +239,7 @@ class SalaryCalc extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <CardTitle tag="h4">Állítsd be az óraszámokat</CardTitle>
+                                <CardTitle tag="h4">Állítsd be a bankjegyeket</CardTitle>
                             </CardHeader>
                             <CardBody className="salaryTable">
                                 <Row>
@@ -276,7 +282,7 @@ class SalaryCalc extends React.Component {
                                             banknoteValue={this.state.banknote.thousand}
                                             onChangeBankNote={this.onChangeBankNote}
                                             name='thousand'
-                                            label="1000 forintosok"
+                                            label="1.000 forintosok"
                                         />
                                     </Col>
                                     <Col md={3}>
@@ -284,7 +290,7 @@ class SalaryCalc extends React.Component {
                                             banknoteValue={this.state.banknote.twoThousand}
                                             onChangeBankNote={this.onChangeBankNote}
                                             name='twoThousand'
-                                            label="2000 forintosok"
+                                            label="2.000 forintosok"
                                         />
                                     </Col>
                                 </Row>
@@ -294,7 +300,7 @@ class SalaryCalc extends React.Component {
                                             banknoteValue={this.state.banknote.fiveThousand}
                                             onChangeBankNote={this.onChangeBankNote}
                                             name='fiveThousand'
-                                            label="5000 forintosok"
+                                            label="5.000 forintosok"
                                         />
                                     </Col>
                                     <Col md={3}>
@@ -302,7 +308,7 @@ class SalaryCalc extends React.Component {
                                             banknoteValue={this.state.banknote.tenThousand}
                                             onChangeBankNote={this.onChangeBankNote}
                                             name='tenThousand'
-                                            label="10000 forintosok"
+                                            label="10.000 forintosok"
                                         />
                                     </Col>
                                     <Col md={3}>
@@ -310,11 +316,10 @@ class SalaryCalc extends React.Component {
                                             banknoteValue={this.state.banknote.twentyThousand}
                                             onChangeBankNote={this.onChangeBankNote}
                                             name='twentyThousand'
-                                            label="20000 forintosok"
+                                            label="20.000 forintosok"
                                         />
                                     </Col>
                                 </Row>
-
                             </CardBody>
                         </Card>
                         <Card>
@@ -328,6 +333,7 @@ class SalaryCalc extends React.Component {
                                         person="anita"
                                         treatments={this.state.treatments.anita}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#99ff66"
                                     />
                                 </Row>
                                 <Row>
@@ -336,6 +342,7 @@ class SalaryCalc extends React.Component {
                                         person="aron"
                                         treatments={this.state.treatments.aron}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#cc33ff"
                                     />
                                 </Row>
                                 <Row>
@@ -344,6 +351,7 @@ class SalaryCalc extends React.Component {
                                         person="barbi"
                                         treatments={this.state.treatments.barbi}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#ff00ff"
                                     />
                                 </Row>
                                 <Row>
@@ -352,6 +360,16 @@ class SalaryCalc extends React.Component {
                                         person="beriZsuzsi"
                                         treatments={this.state.treatments.beriZsuzsi}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#FF0000"
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Gábor"
+                                        person="gabor"
+                                        treatments={this.state.treatments.gabor}
+                                        onChange={this.onChangeNoOfTreatment}
+                                        color="#f49e42"
                                     />
                                 </Row>
                                 <Row>
@@ -360,6 +378,7 @@ class SalaryCalc extends React.Component {
                                         person="hajni"
                                         treatments={this.state.treatments.hajni}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#33cc33"
                                     />
                                 </Row>
                                 <Row>
@@ -368,6 +387,7 @@ class SalaryCalc extends React.Component {
                                         person="reni"
                                         treatments={this.state.treatments.reni}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#ffff00"
                                     />
                                 </Row>
                                 <Row>
@@ -376,6 +396,7 @@ class SalaryCalc extends React.Component {
                                         person="tomi"
                                         treatments={this.state.treatments.tomi}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#0066ff"
                                     />
                                 </Row>
                                 <Row>
@@ -384,6 +405,7 @@ class SalaryCalc extends React.Component {
                                         person="vera"
                                         treatments={this.state.treatments.vera}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#ff5050"
                                     />
                                 </Row>
                                 <Row>
@@ -392,6 +414,7 @@ class SalaryCalc extends React.Component {
                                         person="mZsuzsi"
                                         treatments={this.state.treatments.mZsuzsi}
                                         onChange={this.onChangeNoOfTreatment}
+                                        color="#66ccff"
                                     />
                                 </Row>
                                 <hr/>
@@ -425,44 +448,39 @@ class SalaryCalc extends React.Component {
                                     <tbody>
                                     <tr>
                                         <td>
-                                            <input
-                                                type="number"
-                                                name="sumIncome"
-                                                onChange={this.onChange}
+                                            <NumberFormat
                                                 value={this.state.sumIncome}
-                                                disabled={true}/>
+                                                displayType={'text'}
+                                                thousandSeparator={true}
+                                                suffix={' Ft'}/>
                                         </td>
                                         <td>
-                                            <input
-                                                type="number"
-                                                name="sumTreatments"
-                                                onChange={this.onChange}
+                                            <NumberFormat
                                                 value={this.state.sumTreatments}
-                                                disabled={true}/>
+                                                displayType={'text'}
+                                                thousandSeparator={true}
+                                                suffix={' db'}/>
                                         </td>
                                         <td>
-                                            <input
-                                                type="number"
-                                                name="expenses"
-                                                onChange={this.onChange}
+                                            <NumberFormat
                                                 value={this.state.expenses}
-                                                disabled={true}/>
+                                                displayType={'text'}
+                                                thousandSeparator={true}
+                                                suffix={' Ft'}/>
                                         </td>
                                         <td>
-                                            <input
-                                                type="number"
-                                                name="salaryPart"
-                                                onChange={this.onChange}
+                                            <NumberFormat
                                                 value={this.state.salaryPart}
-                                                disabled={true}/>
+                                                displayType={'text'}
+                                                thousandSeparator={true}
+                                                suffix={' Ft'}/>
                                         </td>
                                         <td>
-                                            <input
-                                                type="number"
-                                                name="hourlyRate"
-                                                onChange={this.onChange}
+                                            <NumberFormat
                                                 value={this.state.hourlyRate}
-                                                disabled={true}/>
+                                                displayType={'text'}
+                                                thousandSeparator={true}
+                                                suffix={' Ft'}/>
                                         </td>
 
                                     </tr>
@@ -475,63 +493,76 @@ class SalaryCalc extends React.Component {
                                 <CardTitle tag="h4">Fizetések</CardTitle>
                             </CardHeader>
                             <CardBody>
-                                <Row>
-                                    <Col>
-                                        <Salary
-                                            label={"Anita"}
-                                            personSalary={this.state.salaries.anita}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('anita')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Áron"}
-                                            personSalary={this.state.salaries.aron}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('aron')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Barbi"}
-                                            personSalary={this.state.salaries.barbi}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('barbi')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Budai Zsuzsi"}
-                                            personSalary={this.state.salaries.beriZsuzsi}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('beriZsuzsi')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Hajni"}
-                                            personSalary={this.state.salaries.hajni}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('hajni')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Reni"}
-                                            personSalary={this.state.salaries.reni}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('reni')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Tomi"}
-                                            personSalary={this.state.salaries.tomi}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('tomi')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Vera"}
-                                            personSalary={this.state.salaries.vera}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('vera')}/>
-                                    </Col>
-                                    <Col>
-                                        <Salary
-                                            label={"Máté Zsuzsi"}
-                                            personSalary={this.state.salaries.mZsuzsi}
-                                            sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('mZsuzsi')}/>
-                                    </Col>
-
-                                </Row>
+                                <Table responsive>
+                                    <thead className=" text-primary">
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <Salary
+                                                label={"Anita"}
+                                                personSalary={this.state.salaries.anita}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('anita')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Áron"}
+                                                personSalary={this.state.salaries.aron}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('aron')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Barbi"}
+                                                personSalary={this.state.salaries.barbi}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('barbi')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Budai Zsuzsi"}
+                                                personSalary={this.state.salaries.beriZsuzsi}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('beriZsuzsi')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Gábor"}
+                                                personSalary={this.state.salaries.gabor}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('gabor')}/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <Salary
+                                                label={"Hajni"}
+                                                personSalary={this.state.salaries.hajni}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('hajni')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Reni"}
+                                                personSalary={this.state.salaries.reni}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('reni')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Tomi"}
+                                                personSalary={this.state.salaries.tomi}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('tomi')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Vera"}
+                                                personSalary={this.state.salaries.vera}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('vera')}/>
+                                        </td>
+                                        <td>
+                                            <Salary
+                                                label={"Máté Zsuzsi"}
+                                                personSalary={this.state.salaries.mZsuzsi}
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('mZsuzsi')}/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </Table>
                             </CardBody>
                         </Card>
                     </Col>

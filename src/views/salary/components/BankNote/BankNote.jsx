@@ -2,6 +2,7 @@ import React from "react";
 import {
     Table
 } from "reactstrap";
+import NumericInput from 'react-numeric-input';
 
 class BankNote extends React.Component {
     render() {
@@ -17,11 +18,14 @@ class BankNote extends React.Component {
                     <tbody>
                         <tr>
                             <td>
-                                <input
-                                    type="number"
+                                <NumericInput mobile
                                     name={this.props.name}
-                                    onChange={this.props.onChangeBankNote}
+                                    onChange={input =>
+                                        this.props.onChangeBankNote(
+                                        input, this.props.name
+                                        )}
                                     value={this.props.banknoteValue}
+                                    min={0}
                                     size={5}/>
                             </td>
                         </tr>

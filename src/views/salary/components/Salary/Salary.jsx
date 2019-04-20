@@ -1,34 +1,47 @@
 import React from "react";
+import {
+    Table,
+} from "reactstrap";
+import NumberFormat from 'react-number-format';
 
 class Salary extends React.Component {
+
+
     render() {
         return (
             <div>
-                <div>
-                    <label>{this.props.label}</label>
-                </div>
-                <div>
-                    <div>
-                        <label>Fizetés</label>
-                    </div>
-                    <div>
-                        <input
-                            type="number"
-                            value={this.props.personSalary}
-                            disabled={true}/>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label>Összes kezelés</label>
-                    </div>
-                    <div>
-                        <input
-                            type="number"
-                            value={this.props.sumPersonTreatmentHours}
-                            disabled={true}/>
-                    </div>
-                </div>
+                <Table responsive>
+                    <thead className=" text-primary">
+                    <th>
+                        {this.props.label}
+                    </th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <NumberFormat
+                                value={this.props.personSalary}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={' Ft'}/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Összes kezelés
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <NumberFormat
+                                value={this.props.sumPersonTreatmentHours}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={' db'}/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </Table>
             </div>
         )
     }

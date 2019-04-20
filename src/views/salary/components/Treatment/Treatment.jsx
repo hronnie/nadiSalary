@@ -9,7 +9,7 @@ class Treatment extends React.Component {
         return (
             <div>
                 <div>
-                    <h5 className="personTitle">{this.props.personName}</h5>
+                    <h5 className="personTitle" style={{"background-color": this.props.color}}>{this.props.personName}</h5>
                 </div>
                 <div className="salaryTable">
                     <Table responsive>
