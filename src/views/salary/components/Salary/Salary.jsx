@@ -12,7 +12,7 @@ class Salary extends React.Component {
             <div>
                 <Table responsive>
                     <thead className=" text-primary">
-                    <th>
+                    <th style={{"background-color": this.props.color, "color": "black"}}>
                         {this.props.label}
                     </th>
                     </thead>

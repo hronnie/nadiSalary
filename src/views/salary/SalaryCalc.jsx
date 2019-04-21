@@ -554,31 +554,36 @@ class SalaryCalc extends React.Component {
                                             <Salary
                                                 label={"Anita"}
                                                 personSalary={this.state.salaries.anita}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('anita')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('anita')}
+                                                color="#99ff66"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Áron"}
                                                 personSalary={this.state.salaries.aron}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('aron')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('aron')}
+                                                color="#cc33ff"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Barbi"}
                                                 personSalary={this.state.salaries.barbi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('barbi')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('barbi')}
+                                                color="#FF00FF"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Budai Zsuzsi"}
                                                 personSalary={this.state.salaries.beriZsuzsi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('beriZsuzsi')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('beriZsuzsi')}
+                                                color="#FF0000"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Gábor"}
                                                 personSalary={this.state.salaries.gabor}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('gabor')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('gabor')}
+                                                color="#f49e42"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -586,31 +591,36 @@ class SalaryCalc extends React.Component {
                                             <Salary
                                                 label={"Hajni"}
                                                 personSalary={this.state.salaries.hajni}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('hajni')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('hajni')}
+                                                color="#33cc33"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Reni"}
                                                 personSalary={this.state.salaries.reni}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('reni')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('reni')}
+                                                color="#ffff00"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Tomi"}
                                                 personSalary={this.state.salaries.tomi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('tomi')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('tomi')}
+                                                color="#0066ff"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Vera"}
                                                 personSalary={this.state.salaries.vera}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('vera')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('vera')}
+                                                color="#ff5050"/>
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Máté Zsuzsi"}
                                                 personSalary={this.state.salaries.mZsuzsi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('mZsuzsi')}/>
+                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('mZsuzsi')}
+                                                color="#66ccff"/>
                                         </td>
                                     </tr>
                                     </tbody>
