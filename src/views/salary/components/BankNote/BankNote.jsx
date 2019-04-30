@@ -10,9 +10,11 @@ class BankNote extends React.Component {
             <div>
                 <Table responsive>
                     <thead className=" text-primary">
-                    <th>
-                        {this.props.label}
-                    </th>
+                    <tr>
+                        <th>
+                            {this.props.label}
+                        </th>
+                    </tr>
 
                     </thead>
                     <tbody>

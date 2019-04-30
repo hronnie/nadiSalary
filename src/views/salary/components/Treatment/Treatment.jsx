@@ -9,33 +9,34 @@ class Treatment extends React.Component {
         return (
             <div>
                 <div>
-                    <h5 className="personTitle" style={{"background-color": this.props.color}}>{this.props.personName}</h5>
+                    <h5 className="personTitle" style={{"backgroundColor": this.props.color}}>{this.props.personName}</h5>
                 </div>
                 <div className="salaryTable">
                     <Table responsive>
                         <thead className=" text-primary">
-                        <th>
-                            Hétfő
-                        </th>
-                        <th>
-                            Kedd
-                        </th>
-                        <th>
-                            Szerda
-                        </th>
-                        <th>
-                            Csütörtök
-                        </th>
-                        <th>
-                            Péntek
-                        </th>
-                        <th>
-                            Szombat
-                        </th>
-                        <th>
-                            Vasárnap
-                        </th>
-
+                        <tr>
+                            <th>
+                                Hétfő
+                            </th>
+                            <th>
+                                Kedd
+                            </th>
+                            <th>
+                                Szerda
+                            </th>
+                            <th>
+                                Csütörtök
+                            </th>
+                            <th>
+                                Péntek
+                            </th>
+                            <th>
+                                Szombat
+                            </th>
+                            <th>
+                                Vasárnap
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
                         <tr>

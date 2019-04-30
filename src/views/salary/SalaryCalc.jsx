@@ -12,10 +12,10 @@ import {
 } from "reactstrap";
 import Treatment from "./components/Treatment/Treatment";
 import Salary from "./components/Salary/Salary";
-import NumberFormat from 'react-number-format';
 import { Calendar } from 'react-date-range';
 import ReactToPrint from 'react-to-print';
 import Report from "./components/Report/Report";
+import Sums from "./Sums/Sums";
 
 class SalaryCalc extends React.Component {
 
@@ -491,80 +491,19 @@ class SalaryCalc extends React.Component {
 
                             </CardBody>
                         </Card>
-                        <Card>
-                            <CardHeader>
-                                <CardTitle tag="h4">Összesités</CardTitle>
-                            </CardHeader>
-                            <CardBody  className="salaryTable">
-                                <Table responsive>
-                                    <thead className=" text-primary">
-                                    <th>
-                                        Összes fizetés
-                                    </th>
-                                    <th>
-                                        Összes kezelés
-                                    </th>
-                                    <th>
-                                        Rezsi
-                                    </th>
-                                    <th>
-                                        Kezelői rész
-                                    </th>
-                                    <th>
-                                        Órabér
-                                    </th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <NumberFormat
-                                                value={this.state.sumIncome}
-                                                displayType={'text'}
-                                                thousandSeparator={true}
-                                                suffix={' Ft'}/>
-                                        </td>
-                                        <td>
-                                            <NumberFormat
-                                                value={this.state.sumTreatments}
-                                                displayType={'text'}
-                                                thousandSeparator={true}
-                                                suffix={' db'}/>
-                                        </td>
-                                        <td>
-                                            <NumberFormat
-                                                value={this.state.expenses}
-                                                displayType={'text'}
-                                                thousandSeparator={true}
-                                                suffix={' Ft'}/>
-                                        </td>
-                                        <td>
-                                            <NumberFormat
-                                                value={this.state.salaryPart}
-                                                displayType={'text'}
-                                                thousandSeparator={true}
-                                                suffix={' Ft'}/>
-                                        </td>
-                                        <td>
-                                            <NumberFormat
-                                                value={this.state.hourlyRate}
-                                                displayType={'text'}
-                                                thousandSeparator={true}
-                                                suffix={' Ft'}/>
-                                        </td>
-
-                                    </tr>
-                                    </tbody>
-                                </Table>
-                            </CardBody>
-                        </Card>
+                        <Sums sumIncome={this.state.sumIncome}
+                              sumTreatments={this.state.sumTreatments}
+                              expenses={this.state.expenses}
+                              salaryPart={this.state.salaryPart}
+                              hourlyRate={this.state.hourlyRate}
+                        />
                         <Card>
                             <CardHeader>
                                 <CardTitle tag="h4">Fizetések</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <Table responsive>
-                                    <thead className=" text-primary">
-                                    </thead>
+
                                     <tbody>
                                     <tr>
                                         <td>

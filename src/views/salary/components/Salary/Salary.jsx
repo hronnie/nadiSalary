@@ -6,15 +6,16 @@ import NumberFormat from 'react-number-format';
 
 class Salary extends React.Component {
 
-debugger;
     render() {
         return (
             <div>
                 <Table responsive>
                     <thead className=" text-primary">
-                    <th style={{"background-color": this.props.color, "color": "black"}}>
-                        {this.props.label}
-                    </th>
+                    <tr>
+                        <th style={{"backgroundColor": this.props.color, "color": "black"}}>
+                            {this.props.label}
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr>
