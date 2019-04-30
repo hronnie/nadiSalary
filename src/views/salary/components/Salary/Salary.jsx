@@ -6,7 +6,7 @@ import NumberFormat from 'react-number-format';
 
 class Salary extends React.Component {
 
-
+debugger;
     render() {
         return (
             <div>
@@ -38,6 +38,17 @@ class Salary extends React.Component {
                                 displayType={'text'}
                                 thousandSeparator={true}
                                 suffix={' db'}/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            h: {this.props.treatments ? this.props.treatments.monday: 0},
+                            k: {this.props.treatments ? this.props.treatments.tuesday: 0},
+                            sz: {this.props.treatments ? this.props.treatments.wednesday: 0},
+                            cs: {this.props.treatments ? this.props.treatments.thursday: 0},
+                            p: {this.props.treatments ? this.props.treatments.friday: 0},
+                            sz: {this.props.treatments ? this.props.treatments.saturday: 0},
+                            v: {this.props.treatments ? this.props.treatments.sunday: 0},
                         </td>
                     </tr>
                     </tbody>

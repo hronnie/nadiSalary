@@ -13,9 +13,12 @@ import {
 import Treatment from "./components/Treatment/Treatment";
 import Salary from "./components/Salary/Salary";
 import NumberFormat from 'react-number-format';
-import { DateRangePicker, Calendar } from 'react-date-range';
+import { Calendar } from 'react-date-range';
+import ReactToPrint from 'react-to-print';
+import Report from "./components/Report/Report";
 
 class SalaryCalc extends React.Component {
+
     constructor() {
         super();
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -154,7 +157,6 @@ class SalaryCalc extends React.Component {
 
 
     async recalculateSalary() {
-        debugger;
         await this.calcAndSetSumTreatments();
         await this.calcAndSetSumIncome();
         await this.calcAndSetExpenses();
@@ -174,7 +176,6 @@ class SalaryCalc extends React.Component {
     }
 
     async calcAndSetHourlyRate() {
-        debugger;
         if (!this.state.salaryPart || this.state.salaryPart === 0) {
             return;
         }
@@ -216,7 +217,6 @@ class SalaryCalc extends React.Component {
     }
 
     onChangeNoOfTreatment = (value, personName, name) => {
-        debugger;
         let treatments = this.state.treatments;
         treatments[personName][name] = Number.parseInt(value);
         this.setState({treatments});
@@ -258,7 +258,31 @@ class SalaryCalc extends React.Component {
         return (
             <div className="content">
                 <Row>
+                    <Col>
+                        <h1>Fizetés kalkulátor</h1>
+                    </Col>
+                </Row>
+
+                <Row>
                     <Col xs={12}>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Hogyan kezdjél hozzá?</CardTitle>
+                            </CardHeader>
+                            <CardBody className="salaryTable">
+                                <Row>
+                                    <ul>
+                                        <li>Gyűjtsd össze az összes pénzt, ami a kezelésből bejött:</li>
+                                            <ul>
+                                                <li>A dobozból, amibe az adományt tesszük</li>
+                                                <li>A váróban lévő szekrénysorban a bal felső fiókban van egy kis doboz, abban van a számlás pénz</li>
+                                                <li>Néha a széfben is össze van készítve egy köteggel</li>
+                                            </ul>
+                                        <li>Gyűjtsd külön a bankjegyeket és az érméket</li>
+                                    </ul>
+                                </Row>
+                            </CardBody>
+                        </Card>
                         <Card>
                             <CardHeader>
                                 <CardTitle tag="h4">Állítsd be az elszámolt időszakot</CardTitle>
@@ -279,14 +303,7 @@ class SalaryCalc extends React.Component {
                                             onChange={this.handleEndDateChange}
                                         />
                                     </Col>
-                                    {/*<Col md={3}>*/}
-                                        {/*<DatePicker*/}
-                                            {/*selected={this.state.endDate}*/}
-                                            {/*onChange={this.handleEndDateChange}*/}
-                                        {/*/>*/}
-                                    {/*</Col>*/}
                                 </Row>
-
                             </CardBody>
                         </Card>
                        <Card>
@@ -555,35 +572,45 @@ class SalaryCalc extends React.Component {
                                                 label={"Anita"}
                                                 personSalary={this.state.salaries.anita}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('anita')}
-                                                color="#99ff66"/>
+                                                color="#99ff66"
+                                                treatments={this.state.treatments.anita}
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Áron"}
                                                 personSalary={this.state.salaries.aron}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('aron')}
-                                                color="#cc33ff"/>
+                                                color="#cc33ff"
+                                                treatments={this.state.treatments.aron}
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Barbi"}
                                                 personSalary={this.state.salaries.barbi}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('barbi')}
-                                                color="#FF00FF"/>
+                                                color="#FF00FF"
+                                                treatments={this.state.treatments.barbi}
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Budai Zsuzsi"}
                                                 personSalary={this.state.salaries.beriZsuzsi}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('beriZsuzsi')}
-                                                color="#FF0000"/>
+                                                color="#FF0000"
+                                                treatments={this.state.treatments.beriZsuzsi}
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Gábor"}
                                                 personSalary={this.state.salaries.gabor}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('gabor')}
-                                                color="#f49e42"/>
+                                                color="#f49e42"
+                                                treatments={this.state.treatments.gabor}
+                                            />
                                         </td>
                                     </tr>
                                     <tr>
@@ -592,39 +619,61 @@ class SalaryCalc extends React.Component {
                                                 label={"Hajni"}
                                                 personSalary={this.state.salaries.hajni}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('hajni')}
-                                                color="#33cc33"/>
+                                                color="#33cc33"
+                                                treatments={this.state.treatments.hajni}
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Reni"}
                                                 personSalary={this.state.salaries.reni}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('reni')}
-                                                color="#ffff00"/>
+                                                treatments={this.state.treatments.reni}
+                                                color="#ffff00"
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Tomi"}
                                                 personSalary={this.state.salaries.tomi}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('tomi')}
-                                                color="#0066ff"/>
+                                                color="#0066ff"
+                                                treatments={this.state.treatments.tomi}
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Vera"}
                                                 personSalary={this.state.salaries.vera}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('vera')}
-                                                color="#ff5050"/>
+                                                color="#ff5050"
+                                                treatments={this.state.treatments.vera}
+                                            />
                                         </td>
                                         <td>
                                             <Salary
                                                 label={"Máté Zsuzsi"}
                                                 personSalary={this.state.salaries.mZsuzsi}
                                                 sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('mZsuzsi')}
-                                                color="#66ccff"/>
+                                                color="#66ccff"
+                                                treatments={this.state.treatments.mZsuzsi}
+                                            />
                                         </td>
                                     </tr>
                                     </tbody>
                                 </Table>
+                            </CardBody>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Report</CardTitle>
+                            </CardHeader>
+                            <CardBody className="salaryTable">
+                                <Report ref={el => (this.componentRef = el)}/>
+                                <ReactToPrint
+                                    trigger={() => <a href="#">Összegzés nyomtatása</a>}
+                                    content={() => this.componentRef}
+                                />
                             </CardBody>
                         </Card>
                     </Col>

@@ -65,6 +65,7 @@
     "jquery": "3.3.1"
   },
   "devDependencies": {
+    "react-to-print": "^2.1.1",
     "webpack-cli": "^3.3.0"
   }
 }
