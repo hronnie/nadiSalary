@@ -8,14 +8,11 @@ import {
     Button,
     Row,
     Col,
-    Table,
 } from "reactstrap";
 import Treatment from "./components/Treatment/Treatment";
 import { Calendar } from 'react-date-range';
 import ReactToPrint from 'react-to-print';
 import Report from "./components/Report/Report";
-import Sums from "./components/Sums/Sums";
-import SalarySums from "./components/SalarySums/SalarySums";
 
 class SalaryCalc extends React.Component {
 
@@ -251,11 +248,6 @@ class SalaryCalc extends React.Component {
 
 
     render() {
-        const selectionRange = {
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
-            key: 'selection',
-        }
         return (
             <div className="content">
                 <Row>
@@ -268,7 +260,7 @@ class SalaryCalc extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <CardTitle tag="h4">Hogyan kezdjél hozzá?</CardTitle>
+                                <CardTitle tag="h4">Hogyan kezdj hozzá?</CardTitle>
                             </CardHeader>
                             <CardBody className="salaryTable">
                                 <Row>
@@ -507,11 +499,11 @@ class SalaryCalc extends React.Component {
                         />
                         <Card>
                             <CardHeader>
-                                <CardTitle tag="h4">Report</CardTitle>
+                                <CardTitle tag="h4">Összegzés nyomtatása</CardTitle>
                             </CardHeader>
                             <CardBody className="salaryTable">
                                 <ReactToPrint
-                                    trigger={() => <a href="#">Összegzés nyomtatása</a>}
+                                    trigger={() => <a href="#" style={{"font-size": "23px", "cursor":"pointer"}}><i className="nc-icon nc-paper"></i> Összegzés nyomtatása</a>}
                                     content={() => this.componentRef}
                                 />
                             </CardBody>
