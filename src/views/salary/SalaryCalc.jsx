@@ -14,8 +14,8 @@ import Treatment from "./components/Treatment/Treatment";
 import { Calendar } from 'react-date-range';
 import ReactToPrint from 'react-to-print';
 import Report from "./components/Report/Report";
-import Sums from "./Sums/Sums";
-import SalarySums from "./SalarySums/SalarySums";
+import Sums from "./components/Sums/Sums";
+import SalarySums from "./components/SalarySums/SalarySums";
 
 class SalaryCalc extends React.Component {
 

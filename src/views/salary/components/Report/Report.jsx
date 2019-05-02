@@ -1,6 +1,6 @@
 import React from "react";
-import SalarySums from "../../SalarySums/SalarySums";
-import Sums from "../../Sums/Sums";
+import SalarySums from "../SalarySums/SalarySums";
+import Sums from "../Sums/Sums";
 import {
     Card, CardBody, CardHeader, CardTitle
 } from "reactstrap";

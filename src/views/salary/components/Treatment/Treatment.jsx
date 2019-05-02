@@ -6,10 +6,13 @@ import {
 
 class Treatment extends React.Component {
     render() {
+        
+        const { personName, treatments, color, onChange, person } = this.props;
+        
         return (
             <div>
                 <div>
-                    <h5 className="personTitle" style={{"backgroundColor": this.props.color}}>{this.props.personName}</h5>
+                    <h5 className="personTitle" style={{"backgroundColor": color}}>{personName}</h5>
                 </div>
                 <div className="salaryTable">
                     <Table responsive>
@@ -43,64 +46,64 @@ class Treatment extends React.Component {
                             <td>
                                 <TreatmentDay
                                     nameOfday="monday"
-                                    noTreatmentsInDay={this.props.treatments.monday}
-                                    onChange={this.props.onChange}
-                                    personName={this.props.personName}
-                                    person={this.props.person}
+                                    noTreatmentsInDay={treatments.monday}
+                                    onChange={onChange}
+                                    personName={personName}
+                                    person={person}
                                 />
                             </td>
                             <td>
                                 <TreatmentDay
                                     nameOfday="tuesday"
-                                    noTreatmentsInDay={this.props.treatments.tuesday}
-                                    onChange={this.props.onChange}
-                                    personName={this.props.personName}
-                                    person={this.props.person}
+                                    noTreatmentsInDay={treatments.tuesday}
+                                    onChange={onChange}
+                                    personName={personName}
+                                    person={person}
                                 />
                             </td>
                             <td>
                                 <TreatmentDay
                                     nameOfday="wednesday"
-                                    noTreatmentsInDay={this.props.treatments.wednesday}
-                                    onChange={this.props.onChange}
-                                    personName={this.props.personName}
-                                    person={this.props.person}
+                                    noTreatmentsInDay={treatments.wednesday}
+                                    onChange={onChange}
+                                    personName={personName}
+                                    person={person}
                                 />
                             </td>
                             <td>
                                 <TreatmentDay
                                     nameOfday="thursday"
-                                    noTreatmentsInDay={this.props.treatments.thursday}
-                                    onChange={this.props.onChange}
-                                    personName={this.props.personName}
-                                    person={this.props.person}
+                                    noTreatmentsInDay={treatments.thursday}
+                                    onChange={onChange}
+                                    personName={personName}
+                                    person={person}
                                 />
                             </td>
                             <td>
                                 <TreatmentDay
                                     nameOfday="friday"
-                                    noTreatmentsInDay={this.props.treatments.friday}
-                                    onChange={this.props.onChange}
-                                    personName={this.props.personName}
-                                    person={this.props.person}
+                                    noTreatmentsInDay={treatments.friday}
+                                    onChange={onChange}
+                                    personName={personName}
+                                    person={person}
                                 />
                             </td>
                             <td>
                                 <TreatmentDay
                                     nameOfday="saturday"
-                                    noTreatmentsInDay={this.props.treatments.saturday}
-                                    onChange={this.props.onChange}
-                                    personName={this.props.personName}
-                                    person={this.props.person}
+                                    noTreatmentsInDay={treatments.saturday}
+                                    onChange={onChange}
+                                    personName={personName}
+                                    person={person}
                                 />
                             </td>
                             <td>
                                 <TreatmentDay
                                     nameOfday="sunday"
-                                    noTreatmentsInDay={this.props.treatments.sunday}
-                                    onChange={this.props.onChange}
-                                    personName={this.props.personName}
-                                    person={this.props.person}
+                                    noTreatmentsInDay={treatments.sunday}
+                                    onChange={onChange}
+                                    personName={personName}
+                                    person={person}
                                 />
                             </td>
                         </tr>

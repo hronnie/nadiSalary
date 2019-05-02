@@ -2,12 +2,12 @@ import React from "react";
 import {
     Card, CardBody, CardHeader, CardTitle, Col, Row, Table,
 } from "reactstrap";
-import Salary from "../components/Salary/Salary";
+import Salary from "../Salary/Salary";
 
 class SalarySums extends React.Component {
 
     render() {
-        const {salaries} = this.props;
+        const { salaries, calcSumPersonTreatmentHours, treatments } = this.props;
         return (
             <div>
 
@@ -24,45 +24,45 @@ class SalarySums extends React.Component {
                                     <Salary
                                         label={"Anita"}
                                         personSalary={salaries.anita}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('anita')}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('anita')}
                                         color="#99ff66"
-                                        treatments={this.props.treatments.anita}
+                                        treatments={treatments.anita}
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Áron"}
-                                        personSalary={this.props.salaries.aron}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('aron')}
+                                        personSalary={salaries.aron}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('aron')}
                                         color="#cc33ff"
-                                        treatments={this.props.treatments.aron}
+                                        treatments={treatments.aron}
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Barbi"}
-                                        personSalary={this.props.salaries.barbi}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('barbi')}
+                                        personSalary={salaries.barbi}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('barbi')}
                                         color="#FF00FF"
-                                        treatments={this.props.treatments.barbi}
+                                        treatments={treatments.barbi}
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Budai Zsuzsi"}
-                                        personSalary={this.props.salaries.beriZsuzsi}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('beriZsuzsi')}
+                                        personSalary={salaries.beriZsuzsi}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('beriZsuzsi')}
                                         color="#FF0000"
-                                        treatments={this.props.treatments.beriZsuzsi}
+                                        treatments={treatments.beriZsuzsi}
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Gábor"}
-                                        personSalary={this.props.salaries.gabor}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('gabor')}
+                                        personSalary={salaries.gabor}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('gabor')}
                                         color="#f49e42"
-                                        treatments={this.props.treatments.gabor}
+                                        treatments={treatments.gabor}
                                     />
                                 </td>
                             </tr>
@@ -70,46 +70,46 @@ class SalarySums extends React.Component {
                                 <td>
                                     <Salary
                                         label={"Hajni"}
-                                        personSalary={this.props.salaries.hajni}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('hajni')}
+                                        personSalary={salaries.hajni}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('hajni')}
                                         color="#33cc33"
-                                        treatments={this.props.treatments.hajni}
+                                        treatments={treatments.hajni}
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Reni"}
-                                        personSalary={this.props.salaries.reni}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('reni')}
-                                        treatments={this.props.treatments.reni}
+                                        personSalary={salaries.reni}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('reni')}
+                                        treatments={treatments.reni}
                                         color="#ffff00"
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Tomi"}
-                                        personSalary={this.props.salaries.tomi}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('tomi')}
+                                        personSalary={salaries.tomi}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('tomi')}
                                         color="#0066ff"
-                                        treatments={this.props.treatments.tomi}
+                                        treatments={treatments.tomi}
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Vera"}
-                                        personSalary={this.props.salaries.vera}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('vera')}
+                                        personSalary={salaries.vera}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('vera')}
                                         color="#ff5050"
-                                        treatments={this.props.treatments.vera}
+                                        treatments={treatments.vera}
                                     />
                                 </td>
                                 <td>
                                     <Salary
                                         label={"Máté Zsuzsi"}
-                                        personSalary={this.props.salaries.mZsuzsi}
-                                        sumPersonTreatmentHours={this.props.calcSumPersonTreatmentHours('mZsuzsi')}
+                                        personSalary={salaries.mZsuzsi}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('mZsuzsi')}
                                         color="#66ccff"
-                                        treatments={this.props.treatments.mZsuzsi}
+                                        treatments={treatments.mZsuzsi}
                                     />
                                 </td>
                             </tr>

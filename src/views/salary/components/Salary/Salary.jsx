@@ -7,6 +7,9 @@ import NumberFormat from 'react-number-format';
 class Salary extends React.Component {
 
     render() {
+
+        const { treatments } = this.props;
+
         return (
             <div>
                 <Table responsive>
@@ -43,13 +46,13 @@ class Salary extends React.Component {
                     </tr>
                     <tr>
                         <td>
-                            h: {this.props.treatments ? this.props.treatments.monday: 0},
-                            k: {this.props.treatments ? this.props.treatments.tuesday: 0},
-                            sz: {this.props.treatments ? this.props.treatments.wednesday: 0},
-                            cs: {this.props.treatments ? this.props.treatments.thursday: 0},
-                            p: {this.props.treatments ? this.props.treatments.friday: 0},
-                            sz: {this.props.treatments ? this.props.treatments.saturday: 0},
-                            v: {this.props.treatments ? this.props.treatments.sunday: 0},
+                            h: {treatments ? treatments.monday: 0},
+                            k: {treatments ? treatments.tuesday: 0},
+                            sz: {treatments ? treatments.wednesday: 0},
+                            cs: {treatments ? treatments.thursday: 0},
+                            p: {treatments ? treatments.friday: 0},
+                            sz: {treatments ? treatments.saturday: 0},
+                            v: {treatments ? treatments.sunday: 0},
                         </td>
                     </tr>
                     </tbody>
