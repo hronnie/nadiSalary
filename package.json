@@ -28,6 +28,7 @@
     "react-datepicker": "^2.4.0",
     "react-dom": "16.8.6",
     "react-google-maps": "9.4.5",
+    "react-moment": "^0.9.2",
     "react-notification-alert": "0.0.8",
     "react-number-format": "^4.0.7",
     "react-numeric-input": "^2.2.3",

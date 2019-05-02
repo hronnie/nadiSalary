@@ -11,11 +11,11 @@ import {
     Table,
 } from "reactstrap";
 import Treatment from "./components/Treatment/Treatment";
-import Salary from "./components/Salary/Salary";
 import { Calendar } from 'react-date-range';
 import ReactToPrint from 'react-to-print';
 import Report from "./components/Report/Report";
 import Sums from "./Sums/Sums";
+import SalarySums from "./SalarySums/SalarySums";
 
 class SalaryCalc extends React.Component {
 
@@ -23,6 +23,7 @@ class SalaryCalc extends React.Component {
         super();
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
+        this.calcSumPersonTreatmentHours = this.calcSumPersonTreatmentHours.bind(this);
         this.state = {
             sumIncome: 0,
             sumTreatments: 0,
@@ -491,124 +492,24 @@ class SalaryCalc extends React.Component {
 
                             </CardBody>
                         </Card>
-                        <Sums sumIncome={this.state.sumIncome}
-                              sumTreatments={this.state.sumTreatments}
-                              expenses={this.state.expenses}
-                              salaryPart={this.state.salaryPart}
-                              hourlyRate={this.state.hourlyRate}
-                        />
-                        <Card>
-                            <CardHeader>
-                                <CardTitle tag="h4">Fizetések</CardTitle>
-                            </CardHeader>
-                            <CardBody>
-                                <Table responsive>
+                        <Report ref={el => (this.componentRef = el)}
+                                sumIncome={this.state.sumIncome}
+                                sumTreatments={this.state.sumTreatments}
+                                expenses={this.state.expenses}
+                                salaryPart={this.state.salaryPart}
+                                hourlyRate={this.state.hourlyRate}
 
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <Salary
-                                                label={"Anita"}
-                                                personSalary={this.state.salaries.anita}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('anita')}
-                                                color="#99ff66"
-                                                treatments={this.state.treatments.anita}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Áron"}
-                                                personSalary={this.state.salaries.aron}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('aron')}
-                                                color="#cc33ff"
-                                                treatments={this.state.treatments.aron}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Barbi"}
-                                                personSalary={this.state.salaries.barbi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('barbi')}
-                                                color="#FF00FF"
-                                                treatments={this.state.treatments.barbi}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Budai Zsuzsi"}
-                                                personSalary={this.state.salaries.beriZsuzsi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('beriZsuzsi')}
-                                                color="#FF0000"
-                                                treatments={this.state.treatments.beriZsuzsi}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Gábor"}
-                                                personSalary={this.state.salaries.gabor}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('gabor')}
-                                                color="#f49e42"
-                                                treatments={this.state.treatments.gabor}
-                                            />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <Salary
-                                                label={"Hajni"}
-                                                personSalary={this.state.salaries.hajni}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('hajni')}
-                                                color="#33cc33"
-                                                treatments={this.state.treatments.hajni}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Reni"}
-                                                personSalary={this.state.salaries.reni}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('reni')}
-                                                treatments={this.state.treatments.reni}
-                                                color="#ffff00"
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Tomi"}
-                                                personSalary={this.state.salaries.tomi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('tomi')}
-                                                color="#0066ff"
-                                                treatments={this.state.treatments.tomi}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Vera"}
-                                                personSalary={this.state.salaries.vera}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('vera')}
-                                                color="#ff5050"
-                                                treatments={this.state.treatments.vera}
-                                            />
-                                        </td>
-                                        <td>
-                                            <Salary
-                                                label={"Máté Zsuzsi"}
-                                                personSalary={this.state.salaries.mZsuzsi}
-                                                sumPersonTreatmentHours={this.calcSumPersonTreatmentHours('mZsuzsi')}
-                                                color="#66ccff"
-                                                treatments={this.state.treatments.mZsuzsi}
-                                            />
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </Table>
-                            </CardBody>
-                        </Card>
+                                salaries={this.state.salaries}
+                                treatments={this.state.treatments}
+                                calcSumPersonTreatmentHours={this.calcSumPersonTreatmentHours}
+                                startDate={this.state.startDate}
+                                endDate={this.state.endDate}
+                        />
                         <Card>
                             <CardHeader>
                                 <CardTitle tag="h4">Report</CardTitle>
                             </CardHeader>
                             <CardBody className="salaryTable">
-                                <Report ref={el => (this.componentRef = el)}/>
                                 <ReactToPrint
                                     trigger={() => <a href="#">Összegzés nyomtatása</a>}
                                     content={() => this.componentRef}
