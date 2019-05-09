@@ -65,6 +65,15 @@ class SalarySums extends React.Component {
                                         treatments={treatments.gabor}
                                     />
                                 </td>
+                                <td>
+                                    <Salary
+                                        label={"Gergő"}
+                                        personSalary={salaries.gergo}
+                                        sumPersonTreatmentHours={calcSumPersonTreatmentHours('gergo')}
+                                        color="white"
+                                        treatments={treatments.gergo}
+                                    />
+                                </td>
                             </tr>
                             <tr>
                                 <td>

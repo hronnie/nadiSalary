@@ -95,6 +95,15 @@ class SalaryCalc extends React.Component {
                     saturday: 0,
                     sunday: 0,
                 },
+                gergo: {
+                    monday: 0,
+                    tuesday: 0,
+                    wednesday: 0,
+                    thursday: 0,
+                    friday: 0,
+                    saturday: 0,
+                    sunday: 0,
+                },
                 reni: {
                     monday: 0,
                     tuesday: 0,
@@ -138,6 +147,7 @@ class SalaryCalc extends React.Component {
                 barbi: 0,
                 beriZsuzsi: 0,
                 gabor: 0,
+                gergo: 0,
                 hajni: 0,
                 reni: 0,
                 tomi: 0,
@@ -265,12 +275,7 @@ class SalaryCalc extends React.Component {
                             <CardBody className="salaryTable">
                                 <Row>
                                     <ul>
-                                        <li>Gyűjtsd össze az összes pénzt, ami a kezelésből bejött:</li>
-                                            <ul>
-                                                <li>A dobozból, amibe az adományt tesszük</li>
-                                                <li>A váróban lévő szekrénysorban a bal felső fiókban van egy kis doboz, abban van a számlás pénz</li>
-                                                <li>Néha a széfben is össze van készítve egy köteggel</li>
-                                            </ul>
+                                        <li>Gyűjtsd be mindkét helyről a bevételt:</li>
                                         <li>Gyűjtsd külön a bankjegyeket és az érméket</li>
                                     </ul>
                                 </Row>
@@ -432,6 +437,15 @@ class SalaryCalc extends React.Component {
                                         treatments={this.state.treatments.gabor}
                                         onChange={this.onChangeNoOfTreatment}
                                         color="#f49e42"
+                                    />
+                                </Row>
+                                <Row>
+                                    <Treatment
+                                        personName="Gergő"
+                                        person="gergo"
+                                        treatments={this.state.treatments.gergo}
+                                        onChange={this.onChangeNoOfTreatment}
+                                        color="white"
                                     />
                                 </Row>
                                 <Row>
