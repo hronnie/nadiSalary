@@ -30,6 +30,9 @@ class SalaryCalc extends React.Component {
             startDate: new Date(),
             endDate: new Date(),
             banknote: {
+                five: 0,
+                ten: 0,
+                twenty: 0,
                 fifty: 0,
                 hundred: 0,
                 twoHundred: 0,
@@ -200,6 +203,9 @@ class SalaryCalc extends React.Component {
 
     async calcAndSetSumIncome() {
         let sum = 0;
+        sum += this.state.banknote.five * 5;
+        sum += this.state.banknote.ten * 10;
+        sum += this.state.banknote.twenty * 20;
         sum += this.state.banknote.fifty * 50;
         sum += this.state.banknote.hundred * 100;
         sum += this.state.banknote.twoHundred * 200;
@@ -309,6 +315,32 @@ class SalaryCalc extends React.Component {
                                 <CardTitle tag="h4">Állítsd be a bankjegyeket</CardTitle>
                             </CardHeader>
                             <CardBody className="salaryTable">
+                                <Row>
+                                    <Col md={3}>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.five}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='five'
+                                            label="5 forintosok"
+                                        />
+                                    </Col>
+                                    <Col md={3}>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.ten}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='ten'
+                                            label="10 forintosok"
+                                        />
+                                    </Col>
+                                    <Col md={3}>
+                                        <BankNote
+                                            banknoteValue={this.state.banknote.twenty}
+                                            onChangeBankNote={this.onChangeBankNote}
+                                            name='twenty'
+                                            label="20 forintosok"
+                                        />
+                                    </Col>
+                                </Row>
                                 <Row>
                                     <Col md={3}>
                                         <BankNote
